@@ -1,0 +1,39 @@
+#container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 8px;
+}
+
+#csv-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 4px;
+}
+
+#json-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 4px;
+}
+
+#csv-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#json-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
