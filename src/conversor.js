@@ -1,4 +1,4 @@
-let converter = require('json-2-csv');
+import converter from 'json-2-csv';
 
 async function csv2Json(csv){
     return JSON.stringify(await converter.csv2jsonAsync(csv))

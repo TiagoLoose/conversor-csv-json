@@ -1,26 +1,25 @@
-import { TextField, Typography, AppBar, Toolbar } from '@material-ui/core';
+import { TextField, Typography, AppBar, Toolbar, formatMs } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './app.css'
 import conversor from './conversor';
 
 function App() {
-  const [csv, setCsv] = useState('')
-  const [json, setJson] = useState('')
+  const [formulario, setFormulario] = useState({})
 
-  function handleCsvChange(e){
-    setCsv(e.target.value)
-  }
+  useEffect(() => {
+    console.log(formulario)
+  }, [formulario])
 
-  function handleJsonChange(e){
-    setJson(e.target.value)
+  function handleFormularioChange(e){
+    setFormulario({...formulario, [e.target.name]: e.target.value})
   }
 
   async function converterParaJson(){
     try{
-      let json = await conversor.csv2Json(csv);
-      setJson(json)
+      const json = await conversor.csv2Json(formulario.csv);
+      setFormulario({...formulario, json})
     }catch(error){
       alert(error.message)
     }
@@ -28,8 +27,8 @@ function App() {
 
   async function converterParaCsv(){
     try{
-      let csv = await conversor.json2Csv(json);
-      setCsv(csv)
+      const csv = await conversor.json2Csv(formulario.json);
+      setFormulario({...formulario, csv})
     }catch (error){
       alert(error.message)
     }
@@ -50,12 +49,13 @@ function App() {
             <TextField
               id="csv-input"
               label="CSV"
+              name="csv"
               multiline
               variant="outlined"
               rows="20"
               fullWidth
-              value={csv}
-              onChange={handleCsvChange}
+              value={formulario.csv}
+              onChange={handleFormularioChange}
             />
           </div>
           <div id="csv-buttons">
@@ -68,12 +68,13 @@ function App() {
             <TextField
               id="json-input"
               label="JSON"
+              name="json"
               multiline
               variant="outlined"
               rows="20"
               fullWidth
-              value={json}
-              onChange={handleJsonChange}
+              value={formulario.json}
+              onChange={handleFormularioChange}
             />
           </div>
           <div id="json-buttons">
